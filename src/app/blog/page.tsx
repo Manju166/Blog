@@ -1,24 +1,15 @@
 import Link from 'next/link'
 import React from 'react'
+import { Blog } from '../types/blog'
 
-export default function Blogpage() {
-    const posts=[
-        {
-            id: 1,
-            title: 'post 1',
-            desc: 'post 1 desc',
-        },
-        {
-            id: 2,
-            title: 'post 2',
-            desc: 'post 2 desc',
-        }
-    ]
+export default async function Blogpage() {
+     const data = await fetch('https://jsonplaceholder.typicode.com/posts')
+  const posts = await data.json()
   return (
     <div>
       <h1>Blog posts</h1>
       <div>
-        {posts.map((post)=>{
+        {posts.map((post:Blog)=>{
             return <div key={post.id}>
                 <h2>{post.title}</h2>
                 <h3>{post.desc}</h3>
