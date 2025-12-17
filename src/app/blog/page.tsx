@@ -1,33 +1,18 @@
-import Link from 'next/link'
-import React from 'react'
+import { Suspense } from 'react';
+import Posts from './components/posts';
 
-export default function Blogpage() {
-    const posts=[
-        {
-            id: 1,
-            title: 'post 1',
-            desc: 'post 1 desc',
-        },
-        {
-            id: 2,
-            title: 'post 2',
-            desc: 'post 2 desc',
-        }
-    ]
+export default function BlogPage() {
   return (
-    <div>
-      <h1>Blog posts</h1>
-      <div>
-        {posts.map((post)=>{
-            return <div key={post.id}>
-                <h2>{post.title}</h2>
-                <h3>{post.desc}</h3>
-                <Link href={`/blog/${post.id}`}>Read More</Link>
-            </div>
-        })}
+    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        <h1 className="text-4xl font-bold text-center text-gray-900 mb-12">
+          Blog Posts
+        </h1>
+
+        <Suspense fallback={<div className="text-center py-8">Loading posts...</div>}>
+          <Posts />
+        </Suspense>
       </div>
     </div>
-  )
+  );
 }
-
-
